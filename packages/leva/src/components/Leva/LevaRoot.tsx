@@ -5,7 +5,7 @@ import { TreeWrapper } from '../Folder'
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
 
 import { StyledRoot } from './StyledRoot'
-import { mergeTheme, LevaCustomTheme } from '../../styles'
+import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { StoreType } from '../../types'
@@ -23,6 +23,10 @@ export type LevaRootProps = {
    * If true, won't display the panel
    */
   hidden?: boolean
+  /**
+   * If true, will preset the panel even if no paths are defined
+   */
+  neverHide?: boolean
   /**
    * If true, the panel will fill its parent
    */
@@ -118,6 +122,7 @@ const LevaCore = React.memo(
     rootClass,
     fill = false,
     flat = false,
+    neverHide = false,
     oneLineLabels = false,
     titleBar = {
       title: undefined,
@@ -136,10 +141,12 @@ const LevaCore = React.memo(
     const [rootRef, set] = useTransform<HTMLDivElement>()
 
     // this generally happens on first render because the store is initialized in useEffect.
-    const shouldShow = paths.length > 0
+    const shouldShow = neverHide || paths.length > 0
     const title = typeof titleBar === 'object' ? titleBar.title || undefined : undefined
     const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
     const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
+
+    globalStyles()
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>

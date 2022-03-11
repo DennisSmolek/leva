@@ -1,5 +1,35 @@
 # leva
 
+## 0.9.23
+
+### Patch Changes
+
+- 3177e59: fix: `disabled` regression
+
+## 0.9.22
+
+### Patch Changes
+
+- bdbe233: fix: properly handle the `disabled` prop. Should fix #309
+
+## 0.9.21
+
+### Patch Changes
+
+- 6fbb57f: Allow panels to show always using the neverHide option
+
+## 0.9.20
+
+### Patch Changes
+
+- 37d9cb5: fix: global styles and user-select fixes
+
+## 0.9.19
+
+### Patch Changes
+
+- 991f557: feat: add `editable`, `rows` to String component
+
 ## 0.9.18
 
 ### Patch Changes
